@@ -1,0 +1,6 @@
+/embeddingGeneration/__pycache__/
+/embeddingGeneration/dump/
+/embeddingGeneration/tmp/
+/vectorStore/pgvector
+/vectorStore/solr
+/retrievalService
