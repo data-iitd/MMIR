@@ -4,3 +4,5 @@
 /vectorStore/pgvector
 /vectorStore/solr
 /retrievalService
+vectorStore/faiss/ingestDataIntoFAISS/new_build_faiss.py
+/vectorStore/faiss/ingestDataIntoFAISS/dump
