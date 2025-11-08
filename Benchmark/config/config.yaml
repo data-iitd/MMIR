@@ -1,0 +1,125 @@
+# config.yaml
+paths:
+  dataset:
+    coco:
+      base_image_path: "/mnt/storage/RSystemsBenchmarking/data/datasets/coco/images/val2014/"
+      annotations_path : "/mnt/storage/RSystemsBenchmarking/data/datasets/coco/annotations/coco_karpathy_test.json"
+      ingest_annotations_path : "/mnt/storage/RSystemsBenchmarking/data/datasets/coco/processed_mapping/coco_karpathy_test_ingest.json"
+      query_annotations_path : "/mnt/storage/RSystemsBenchmarking/data/datasets/coco/processed_mapping/coco_karpathy_test_query.json"
+    
+    flickr:
+      base_image_path: "/mnt/storage/RSystemsBenchmarking/data/datasets/vision/flickr30k/images/flickr30k-images/flickr30k-images/"
+      annotations_path: "/mnt/storage/RSystemsBenchmarking/data/datasets/vision/flickr30k/annotations/test.json"
+      ingest_annotations_path : "/mnt/storage/RSystemsBenchmarking/data/datasets/vision/flickr30k/processed_mapping/flickr_test_ingest.json"
+      query_annotations_path : "/mnt/storage/RSystemsBenchmarking/data/datasets/vision/flickr30k/processed_mapping/flickr_test_query.json"
+
+  project_root: "/mnt/storage/RSystemsBenchmarking/gitProject/Benchmark/"
+
+models:
+  clip: "ViT-L/14@336px"
+  minilm : "/mnt/storage/sanskar/samy/Benchmark/Models/MiniLm"
+  # flava: "facebook/flava-full" 
+  flava: "/mnt/storage/RSystemsBenchmarking/gitProject/Benchmark/Models/flava_full_model" 
+
+  #EDITING - ZIV
+  uniir:
+    arch: "ViT-L-14-quickgelu"
+    checkpoint: "/mnt/storage/ziv/final_uriIR/checkpoint/CLIP_SF/clip_sf_large.pth"
+    prompt: ""
+    
+  blip2_itm : "blip2_image_text_matching"
+  #new ziv:
+  flmr:
+    checkpoint: "/mnt/storage/ziv/FLMR_CURRENT/models/PreFLMR_ViT-L"
+    image_processor: "/mnt/storage/ziv/FLMR_CURRENT/models/clip-vit-large-patch14"
+    query_prefix: "[INST] retrieve text/image most relevant to this query [/INST]"
+
+
+# Default values if no argument is entered by the user
+selected_config:
+  dataset : "coco"
+  model : "minilm"
+  db : "solr"
+  # reranking_model : "blip2"
+
+vector_store:
+  solr:
+    host: "localhost"
+    port: "8983"
+    protocol: "http"
+    url_path: "/solr"
+    # connection_url: "http://localhost:8983/solr"
+
+  faiss:
+    index_dir: "/mnt/storage/RSystemsBenchmarking/gitProject/Benchmark/data/faiss_index"
+
+  flmr:
+    root_dir: "/mnt/storage/RSystemsBenchmarking/gitProject/Benchmark/data/flmr_index"
+    experiment_name_map:
+      coco: "flmr_coco"
+      flickr: "flmr_flickr"
+    index_name: "default"
+
+
+debug_logs : True
+k : 50
+
+endpoints:
+  clip_image_coco_solr: "http://localhost:5050/clip_image_coco_solr"
+  clip_text_coco_solr: "http://localhost:5050/clip_text_coco_solr"
+  clip_image_flickr_solr: "http://localhost:5050/clip_image_flickr_solr"
+  clip_text_flickr_solr: "http://localhost:5050/clip_text_flickr_solr"
+  
+  flava_image_coco_solr: "http://localhost:5050/flava_image_coco_solr"
+  flava_text_coco_solr: "http://localhost:5055/flava_text_coco_solr"
+  flava_image_flickr_solr: "http://localhost:5050/flava_image_flickr_solr"
+  flava_text_flickr_solr: "http://localhost:5050/flava_text_flickr_solr"
+
+  uniir_text_coco_solr: "http://localhost:5055/uniir_text_coco_solr"
+  uniir_image_coco_solr: "http://localhost:5055/uniir_image_coco_solr"
+  uniir_text_flickr_solr: "http://localhost:5050/uniir_text_flickr_solr"
+  uniir_image_flickr_solr: "http://localhost:5050/uniir_image_flickr_solr"
+  uniir_joint-image-text_coco_solr: "http://localhost:5050/uniir_joint-image-text_coco_solr"
+  uniir_joint-image-text_flickr_solr: "http://localhost:5050/uniir_joint-image-text_flickr_solr"
+
+  minilm_text_coco_solr: "http://localhost:5050/minilm_text_coco_solr"
+  minilm_text_flickr_solr: "http://localhost:5050/minilm_text_flickr_solr"
+  bm25_text_coco_solr: "http://localhost:5050/bm25_text_coco_solr"
+  bm25_text_flickr_solr: "http://localhost:5050/bm25_text_flickr_solr"
+  
+  
+  flava_image_coco_faiss: "http://localhost:5053/flava_image_coco_faiss"
+  flava_text_coco_faiss: "http://localhost:5053/flava_text_coco_faiss"
+  flava_image_flickr_faiss: "http://localhost:5053/flava_image_flickr_faiss"
+  flava_text_flickr_faiss: "http://localhost:5053/flava_text_flickr_faiss"
+  
+  uniir_image_coco_faiss: "http://localhost:5053/uniir_image_coco_faiss"
+  uniir_text_coco_faiss: "http://localhost:5053/uniir_text_coco_faiss"
+  uniir_image_flickr_faiss: "http://localhost:5053/uniir_image_flickr_faiss"
+  uniir_text_flickr_faiss: "http://localhost:5053/uniir_text_flickr_faiss"
+  uniir_joint-image-text_coco_faiss: "http://localhost:5053/uniir_joint-image-text_coco_faiss"
+  uniir_joint-image-text_flickr_faiss: "http://localhost:5053/uniir_joint-image-text_flickr_faiss"
+
+  minilm_text_coco_faiss: "http://localhost:5053/minilm_text_coco_faiss"
+  minilm_text_flickr_faiss: "http://localhost:5053/minilm_text_flickr_faiss"
+  clip_image_coco_faiss: "http://localhost:5053/clip_image_coco_faiss"   
+  clip_text_coco_faiss: "http://localhost:5053/clip_text_coco_faiss"
+  clip_image_flickr_faiss: "http://localhost:5053/clip_image_flickr_faiss"
+  clip_text_flickr_faiss: "http://localhost:5053/clip_text_flickr_faiss"
+
+  # neural_reranking-with-endpoints: "http://localhost:8084/rerank_neural_blip2_endpoints"
+  neural_reranking: "http://localhost:8083/rerank_with_"
+  # rrf: "http://localhost:8084/rrf2_fusion"
+  rrf: "http://localhost:5050/rrf2_fusion"
+  # rrf: "http://localhost:5050/rrf2_fusion"
+
+
+  two_stage_retrieval_faiss:  "http://localhost:8011/two_stage_retrieval"       
+  two_stage_retrieval_solr:  "http://localhost:5050/two_stage_retrieval"       
+
+  flmr_caption_flickr_faiss: "http://localhost:5052/flmr_caption_flickr_colbert"
+  flmr_joint_flickr_faiss: "http://localhost:5052/flmr_joint_flickr_colbert"
+  flmr_caption_coco_faiss: "http://localhost:5052/flmr_caption_coco_colbert"
+  flmr_joint_coco_faiss: "http://localhost:5052/flmr_joint_coco_colbert"
+
+  
