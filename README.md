@@ -12,3 +12,4 @@ The goal of this project is to benchmark and evaluate various cross-modal retrie
 - [FAISS Index Building](Benchmark/code/vectorStore/faiss/ingestDataIntoFAISS/README.md)
 - [FLMR Index Building](Benchmark/code/vectorStore/flmr/README.md)
 - [Configuration](Benchmark/config/README.md)
+- [Evaluation Scripts](Benchmark/code/evaluation/README.md)
